@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <h3 class="subtitulo encabezado">Mi Usuario</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <div id="head-icon-veterinaria" class="row">
+        <img [src]="usuario.imagen" alt="perfil-usuario" />
+      </div>
+      <br />
+      <br />
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon
+            name="id-card-outline"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>
+            <p>Cédula - RUC:</p>
+            <h2>{{ usuario.cedula | titlecase }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon
+            name="people-outline"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>
+            <p>Nombre:</p>
+            <h2>
+              {{ usuario.nombre | titlecase }} {{ usuario.apellido | titlecase
+              }}
+            </h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <p>Correo:</p>
+            <h2>{{ usuario.correo | titlecase }}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <div id="botonesHeader">
+      <ion-button size="small" [routerLink]="['/edit-usuario']"
+        >Actualizar Usuario</ion-button
+      >
+    </div>
+  </ion-card>
+</ion-content>

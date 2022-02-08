@@ -1,0 +1,56 @@
+
+
+ion-card {
+  width: 100%;
+  height: 700px;
+  box-shadow: none;
+  border-radius: 12px;
+  
+  img {
+      object-fit: cover;
+      width: 150%;
+      height: 700px;
+      transform: scale(1.1, 1.1) rotate(1deg);
+      transition: 600ms all ease-in-out;
+  }
+}
+
+.swiper-slide-active {
+  transform: scale(1.05, 1.05);
+
+  ion-card {
+      img {
+          transform: scale(1, 1);
+      }
+  }
+}
+
+.swiper-slide {
+  transition: 400ms all ease-in-out;
+}
+
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  
+  transform: translateY(-50%);
+}
+
+.centrado{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.contenedor{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  
+}

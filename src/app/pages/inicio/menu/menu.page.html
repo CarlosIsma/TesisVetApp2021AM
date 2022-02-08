@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <h3 class="subtitulo encabezado">Menú VetApp</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="text-align: center" fixed>
+    <ion-row style="margin-top: -10%; margin-bottom: 7%">
+      <ion-col id="infoUser">
+        <ion-label>Bienvenido</ion-label>
+        <br />
+        <br />
+        <ion-label id="nombreUsuario">{{user.nombre}} </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="user.rol === 'ciudadano' || user.rol === 'invitado'">
+      <ion-col>
+        <button
+          id="veterinarias-lista"
+          [routerLink]="['/veterinarias-lista']"
+        ></button>
+        <br />
+        <ion-label class="titulo"> Lista de veterinarias </ion-label>
+        <br />
+        <br />
+      </ion-col>
+      <ion-col>
+        <button
+          id="veterinarias-mapa"
+          [routerLink]="['/ubicacion-veterinarias']"
+        ></button>
+        <br />
+        <ion-label class="titulo"> Mapa Veterinarias </ion-label>
+        <br />
+        <br />
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="user.rol === 'veterinaria'">
+      <ion-col>
+        <button
+          id="formulario-veterinaria"
+          [routerLink]="['/formulario-veterinaria']"
+        ></button>
+        <br />
+        <ion-label class="titulo"> Formulario veterinarias </ion-label>
+        <br />
+        <br />
+      </ion-col>
+      <ion-col>
+        <button
+          id="info-veterinaria"
+          [routerLink]="['/info-veterinaria']"
+        ></button>
+        <br />
+        <ion-label class="titulo"> Mi Veterinaria </ion-label>
+        <br />
+        <br />
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="user.rol !== 'invitado'">
+      <ion-col>
+        <button id="usuario-info" [routerLink]="['/usuario']"></button>
+        <br />
+        <ion-label class="titulo"> Perfil de Usuario </ion-label>
+        <br />
+        <br />
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="user.rol !== 'invitado'">
+      <ion-col style="text-align: center" size="10" offset="1">
+        <ion-button
+        shape="round"
+          type="button"
+          color="danger"
+          expand="block"
+          (click)="logOut()"
+          >CERRAR SESIÓN</ion-button
+        >
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="user.rol === 'invitado'">
+      <ion-col style="text-align: center" size="10" offset="1">
+        <ion-button
+        shape="round"
+          type="button"
+          color="danger"
+          expand="block"
+          (click)="logOut()"
+          >SALIR</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+

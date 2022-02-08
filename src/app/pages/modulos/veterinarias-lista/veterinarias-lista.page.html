@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <h3 class="subtitulo encabezado">Lista De Veterinarias</h3>
+  </ion-toolbar>
+
+  <ion-item *ngIf="!ocultarFiltro">
+    <ion-label> Filtrar por sector de ubicación </ion-label>
+    <ion-select
+      interface="popover"
+      (ionChange)="getVeterinariasBySector($event)"
+      #filtroSelect
+    >
+      <ion-select-option value="norte">Norte</ion-select-option>
+      <ion-select-option value="centro">Centro</ion-select-option>
+      <ion-select-option value="sur">Sur</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="mostrarLimpiarFiltro">
+    <ion-button (click)="limpiarFiltro()" fill="clear" style="color: red">
+      Restablecer
+    </ion-button>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="veterinarias.length === 0">
+    <ion-item *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1]">
+      <ion-label>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <div *ngIf="veterinarias.length > 0">
+    <ion-card *ngFor="let veterinaria of veterinarias">
+      <ion-card-header>
+        <ion-card-title>{{veterinaria.nombre}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-img [src]="veterinaria.imagen"></ion-img>
+
+      <ion-item>
+        <ion-label>INFORMACIÓN</ion-label>
+      </ion-item>
+
+      <ion-card-content>
+        Dirección: {{veterinaria.direccion | titlecase}}
+        <br />
+        <br />
+        Referencia: {{veterinaria.referencia | titlecase}}
+        <br />
+        <br />
+        Teléfono: {{veterinaria.telefono}}
+        <br />
+        <br />
+        Sector de ubicación: {{veterinaria.sector | titlecase}}
+        <br />
+        <br />
+        Horario: {{veterinaria.horaApertura}} - {{veterinaria.horaCierre}}
+        <br />
+        <br />
+        Servicios ofertados: {{veterinaria.servicios | titlecase}}
+        <br />
+        <br />
+        Formas de pago: {{veterinaria.formaPago | titlecase}}
+      </ion-card-content>
+
+      <!-- <ion-item>
+        <ion-icon name="map" slot="start" color="success"></ion-icon>
+        <ion-label>Localización: </ion-label>
+        <ion-button
+          fill="outline"
+          slot="end"
+          routerLink="/mapa/{{veterinaria.nombre}}"
+          >Ver en el mapa</ion-button
+        >
+      </ion-item> -->
+    </ion-card>
+  </div>
+</ion-content>

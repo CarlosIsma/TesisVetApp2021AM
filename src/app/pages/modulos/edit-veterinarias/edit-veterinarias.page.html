@@ -1,0 +1,197 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <h3 class="subtitulo encabezado">Actualizar Veterinaria</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="editarVeterinariaForm" (ngSubmit)="comprobarCamposRequeridos(form)">
+    <!-- CAMPO NOMBRE -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese el nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="errorNombre">
+      <ion-label>El nombre es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO DIRECCION -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese la dirección</ion-label>
+      <ion-input formControlName="direccion" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errordireccion">
+      <ion-label>La dirección es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO REFERENCIA -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese una referencia</ion-label>
+      <ion-input formControlName="referencia" type="text"></ion-input>
+    </ion-item>
+
+    <!-- CAMPO TELEFONO -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Teléfono:</ion-label>
+      <ion-input formControlName="telefono" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorTelefono">
+      <ion-label>El teléfono es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+
+    <!-- CAMPO SECTOR -->
+
+    <ion-item>
+      <ion-label>Seleccione el sector en el que se encuentra ubicada la
+        veterinaria</ion-label>
+      <ion-select formControlName="sector">
+        <ion-select-option value="sur">Sur</ion-select-option>
+        <ion-select-option value="centro">Centro</ion-select-option>
+        <ion-select-option value="norte">Norte</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorSector">
+      <ion-label>Debe seleccionar una opción</ion-label>
+    </ion-item>
+
+    <!-- CAMPO FORMA DE PAGO -->
+
+    <ion-item>
+      <ion-label>Seleccione una forma de pago</ion-label>
+      <ion-select formControlName="formaPago">
+        <ion-select-option value="tarjetaCredito">Tarjeta de Credito</ion-select-option>
+        <ion-select-option value="efectivo">Efectivo</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorFormaPago">
+      <ion-label>Debe seleccionar una opción</ion-label>
+    </ion-item>
+
+    <!-- CAMPO SERVICIOS -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese la descripcion del servicio ofrecido</ion-label>
+      <ion-input formControlName="servicios" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorServicios">
+      <ion-label>El servicio es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO HORARIO APERTURA -->
+
+    <ion-item>
+      <ion-label position="floating">Seleccione la hora de apertura</ion-label>
+      <ion-input formControlName="horaApertura" type="time"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorHoraApertura">
+      <ion-label>La hora de apertura es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO HORARIO CIERRE -->
+
+    <ion-item>
+      <ion-label position="floating">Selecciona la hora de cierre</ion-label>
+      <ion-input formControlName="horaCierre" type="time"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorHoraCierre">
+      <ion-label>La hora de cierre es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+
+
+    <ion-item color="danger" *ngIf="errorLongitud">
+      <ion-label>
+        La coordenada de longitud es <strong>requerida</strong>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="map-outline" (click)="getCoordenadas(); $event.preventDefault()" slot="end"></ion-icon>
+    </ion-item>
+
+    <!-- CAMPO IMAGEN -->
+    <!-- EDITAR IMAGEN DE LA VETERINARIA -->
+
+    <ion-item>
+      <ion-label>Editar imagen veterinaria</ion-label>
+      <ion-checkbox slot="start" (ionChange)="checkImagen($event)"></ion-checkbox>
+    </ion-item>
+
+    <ng-container *ngIf="imagenChecked; then editarimg"> </ng-container>
+    <ng-template #editarimg>
+      <ion-item>
+        <ion-label class="normal"> Imágen: </ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <label for="file-upload">
+              <ion-icon slot="icon-only" name="images-sharp"></ion-icon>
+            </label>
+            <input (change)="showPreview($event)" id="file-upload" style="display: none" type="file" accept="image/*" />
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-item color="danger" *ngIf="errorIMG">
+        <ion-label> Seleccione una imagen de la veterinaria</ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="url !== '' || url !== null" color="primary">
+        <img class="image" [src]="url" />
+      </ion-item>
+    </ng-template>
+
+    <!-- CAMPO PDF -->
+    <!-- EDITAR ARCHIVO PDF -->
+
+    <ion-item>
+      <ion-label>Editar PDF - (RUC)</ion-label>
+      <ion-checkbox slot="start" (ionChange)="checkPDF($event)"></ion-checkbox>
+    </ion-item>
+
+    <ng-container *ngIf="pdfChecked; then editarPDF"> </ng-container>
+    <ng-template #editarPDF>
+      <ion-item>
+        <ion-label class="normal"> PDF: </ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <label for="pdf-upload">
+              <ion-icon slot="icon-only" name="document-outline"></ion-icon>
+            </label>
+            <input (change)="seleccionarPDf($event)" id="pdf-upload" style="display: none" type="file"
+              accept="application/pdf" />
+          </ion-button>
+        </ion-buttons>>
+      </ion-item>
+
+      <ion-item color="danger" *ngIf="errorPDF">
+        <ion-label> Seleccione un archivo del RUC en formato PDF</ion-label>
+      </ion-item>
+    </ng-template>
+
+    <!-- CAMPO BOTONES -->
+
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-button shape="round" type="submit" expand="block" color="success">ACTUALIZAR</ion-button>
+        <br />
+        <ion-button shape="round" type="button" expand="block" [routerLink]="['/menu']" color="danger">VOLVER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

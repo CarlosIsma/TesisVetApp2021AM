@@ -1,0 +1,47 @@
+#map {
+  height: 80%;
+  width: 100%;
+}
+
+.mapDialogButton {
+  width: fit-content;
+  height: 53px;
+  position: relative;
+  top: -10px;
+  margin-left: 7px;
+}
+
+.contenedorBotones {
+  padding-top: 0;
+  justify-content: center;
+}
+
+#direccion {
+  max-width: 80%;
+  padding: 0;
+}
+
+#direccion input {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: large;
+}
+
+#botonUbicacion {
+  max-width: 20%;
+  padding: 0;
+  padding-top: 5%;
+  background-color: cornflowerblue;
+}
+
+#botonUbicacion button {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: cornflowerblue;
+}
+
+#botonUbicacion button ion-icon {
+  font-size: 2rem;
+}

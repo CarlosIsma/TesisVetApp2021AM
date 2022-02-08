@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <h3 class="subtitulo encabezado">Formulario de Registro</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="comprobarPass(form)">
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Cédula o RUC</ion-label>
+      <ion-input name="cedula" class="normal" type="number" ngModel required></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Nombre</ion-label>
+      <ion-input name="nombre" class="normal" type="text" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Apellido</ion-label>
+      <ion-input name="apellido" class="normal" type="text" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Correo</ion-label>
+      <ion-input name="correo" class="normal" type="email" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Contraseña</ion-label>
+      <ion-input name="password" class="normal" [type]="ShowPassword ?'text':'password'" ngModel required></ion-input>
+      <ion-icon [name]="passwordToggleIcon" slot="end" (click)="togglePassword()"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Confirmar Contraseña</ion-label>
+      <ion-input name="confirmPass" [type]="ShowPassword1 ?'text':'password'" class="normal" ngModel required></ion-input>
+      <ion-icon [name]="passwordToggleIcon1" slot="end" (click)="togglePassword1()"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal">Tipo de usuario</ion-label>
+      <ion-select name="rol" ngModel required>
+        <ion-select-option value="ciudadano">Ciudadano</ion-select-option>
+        <ion-select-option value="veterinaria">Veterinaria</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal"> Imágen: </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <label for="file-upload">
+            <ion-icon slot="icon-only" name="images-sharp"></ion-icon>
+          </label>
+          <input (change)="showPreview($event)" id="file-upload" style="display: none" type="file" accept="image/*"
+            required />
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item *ngIf="url !== '' || url !== null">
+      <img class="image" [src]="url" />
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-button shape="round" type="submit" [disabled]="form.invalid" expand="block" color="success">REGISTRARSE
+          </ion-button>
+          <br />
+          <ion-button shape="round" type="button" expand="block" [routerLink]="['/login']" color="danger">VOLVER
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

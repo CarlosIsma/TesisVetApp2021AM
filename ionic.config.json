@@ -1,0 +1,7 @@
+{
+  "name": "veterinariasCO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

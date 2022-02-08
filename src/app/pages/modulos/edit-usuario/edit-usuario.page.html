@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+    </ion-buttons>
+    <h3 class="subtitulo encabezado">Actualizar Usuario</h3>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="editarUsuarioForm" (ngSubmit)="comprobarCamposRequeridos(form)">
+    <!-- CAMPO NOMBRE -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese el nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorNombre">
+      <ion-label>El nombre es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO APELLIDO -->
+
+    <ion-item>
+      <ion-label position="floating">Ingrese el apellido</ion-label>
+      <ion-input formControlName="apellido" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorNombre">
+      <ion-label>El apellido es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO IMAGEN -->
+    <!-- EDITAR IMAGEN DEL USUARIO -->
+
+    <ion-item>
+      <ion-label>Editar imagen usuario</ion-label>
+      <ion-checkbox slot="start" (ionChange)="checkImagen($event)"></ion-checkbox>
+    </ion-item>
+
+    <ng-container *ngIf="imagenChecked; then editarimg"> </ng-container>
+    <ng-template #editarimg>
+      <ion-item>
+        <ion-label class="normal"> Imágen: </ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <label for="file-upload">
+              <ion-icon slot="icon-only" name="images-sharp"></ion-icon>
+            </label>
+            <input (change)="showPreview($event)" id="file-upload" style="display: none" type="file" accept="image/*" />
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-item color="danger" *ngIf="errorIMG">
+        <ion-label> Seleccione una imagen de usuario</ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="url !== '' || url !== null" color="primary">
+        <img class="image" [src]="url" />
+      </ion-item>
+    </ng-template>
+
+    <!-- CAMPO BOTONES -->
+
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-button shape="round" type="submit" expand="block" color="success">ACTUALIZAR</ion-button>
+        <br />
+        <ion-button shape="round" type="button" expand="block" [routerLink]="['/menu']" color="danger">VOLVER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -1,0 +1,54 @@
+#veterinarias-lista {
+  background-image: url("../../../../assets/icon/hospital.png");
+  background-size: cover;
+  background-color: white;
+  height: 10rem;
+  width: 10rem;
+}
+
+#veterinarias-mapa {
+  background-image: url("../../../../assets/icon/veterinary.png");
+  background-size: cover;
+  background-color: white;
+  height: 10rem;
+  width: 10rem;
+}
+
+#formulario-veterinaria {
+  background-image: url("../../../../assets/icon/veterinaryForm.png");
+  background-size: cover;
+  background-color: white;
+  height: 10rem;
+  width: 10rem;
+}
+
+#info-veterinaria {
+  background-image: url("../../../../assets/icon/Myveterinary.png");
+  background-size: cover;
+  background-color: white;
+  height: 10rem;
+  width: 10rem;
+}
+
+#usuario-info {
+  background-image: url("../../../../assets/icon/veterinarian.png");
+  background-size: cover;
+  background-color: white;
+  height: 10rem;
+  width: 10rem;
+}
+
+ion-grid {
+  margin-top: 5rem;
+}
+
+
+#infoUser {
+  font-size: larger;
+}
+
+#infoUser #nombreUsuario {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: green;
+}

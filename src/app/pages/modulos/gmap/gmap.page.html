@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <h3 class="subtitulo encabezado">Obtener Ubicación</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col id="direccion">
+      <input
+        list="directionList"
+        matInput
+        [(ngModel)]="direccion"
+        (ngModelChange)="searchChanged($event)"
+        (change)="getCoords($event)"
+        placeholder="Dirección"
+        disabled="true"
+      />
+      <datalist id="directionList">
+        <option
+          [value]="result.description"
+          *ngFor="let result of searchResults"
+        ></option>
+      </datalist>
+    </ion-col>
+    <ion-col id="botonUbicacion">
+      <button color="primary" class="mapDialogButton" (click)="setMarker()">
+        <ion-icon name="location-outline"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <div #mapContainer id="map"></div>
+  <div mat-dialog-actions class="contenedorBotones">
+    <ion-button
+      type="button"
+      expand="block"
+      color="primary"
+      (click)="enviarDireccion()"
+      >ACEPTAR</ion-button
+    >
+    <ion-button type="button" expand="block" color="danger" (click)="cancelar()"
+      >VOLVER</ion-button
+    >
+  </div>
+</ion-content>

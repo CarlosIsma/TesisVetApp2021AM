@@ -1,0 +1,190 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <h3 class="subtitulo encabezado">Formulario de Registro</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <form [formGroup]="nuevaVeterinariaForm" (ngSubmit)="comprobarCamposRequeridos(form)">
+    <!-- CAMPO NOMBRE -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Nombre De La Clínica:</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorNombre">
+      <ion-label>El nombre es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO DIRECCION -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Dirección:</ion-label>
+      <ion-input formControlName="direccion" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errordireccion">
+      <ion-label>La dirección es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO REFERENCIA -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Referencia:</ion-label>
+      <ion-input formControlName="referencia" type="text"></ion-input>
+    </ion-item>
+    <!-- CAMPO TELEFONO -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Teléfono:</ion-label>
+      <ion-input formControlName="telefono" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorTelefono">
+      <ion-label>El teléfono es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO SECTOR -->
+
+    <ion-item>
+      <ion-label class="normal">Sector De La Veterinaria:</ion-label>
+      <ion-select formControlName="sector">
+        <ion-select-option value="sur">Sur</ion-select-option>
+        <ion-select-option value="centro">Centro</ion-select-option>
+        <ion-select-option value="norte">Norte</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorSector">
+      <ion-label>Debe seleccionar una opción</ion-label>
+    </ion-item>
+
+    <!-- CAMPO FORMA DE PAGO -->
+
+    <ion-item>
+      <ion-label class="normal">Forma de Pago:</ion-label>
+      <ion-select formControlName="formaPago">
+        <ion-select-option value="tarjetaCredito">Tarjeta de Crédito</ion-select-option>
+        <ion-select-option value="efectivo">Efectivo</ion-select-option>
+        <ion-select-option value="efectivo">Efectivo y Tarjeta de Crédito</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorFormaPago">
+      <ion-label>Debe seleccionar una opción</ion-label>
+    </ion-item>
+
+    <!-- CAMPO SERVICIOS -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Servicios Ofrecidos:</ion-label>
+      <ion-input formControlName="servicios" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorServicios">
+      <ion-label>El servicio es <strong>requerido</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO HORARIO APERTURA -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Hora de Apertura:</ion-label>
+      <ion-input formControlName="horaApertura" type="time"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorHoraApertura">
+      <ion-label>La hora de apertura es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO HORARIO CIERRE -->
+
+    <ion-item>
+      <ion-label class="normal" position="floating">Hora de Cierre:</ion-label>
+      <ion-input formControlName="horaCierre" type="time"></ion-input>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorHoraCierre">
+      <ion-label>La hora de cierre es <strong>requerida</strong></ion-label>
+    </ion-item>
+
+    <!-- CAMPO LATITUD -->
+
+    <ion-item color="danger" *ngIf="errorLatitud">
+      <ion-label>
+        La coordenada de latitud es <strong>requerida</strong>
+      </ion-label>
+    </ion-item>
+
+    <!-- CAMPO LONGITUD -->
+
+    <ion-item color="danger" *ngIf="errorLongitud">
+      <ion-label>
+        La coordenada de longitud es <strong>requerida</strong>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="normal">
+        Ingrese la Ubicación:
+      </ion-label>
+      <ion-icon name="map-outline" (click)="getCoordenadas(); $event.preventDefault()" slot="end"></ion-icon>
+    </ion-item>
+
+    <!-- CAMPO IMAGEN -->
+
+    <ion-item>
+      <ion-label class="normal"> Imágen: </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <label for="file-upload">
+            <ion-icon slot="icon-only" name="images-sharp"></ion-icon>
+          </label>
+          <input (change)="showPreview($event)" id="file-upload" style="display: none" type="file" accept="image/*" />
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorIMG">
+      <ion-label class="normal"> Seleccione una imagen de la veterinaria</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="url !== '' || url !== null">
+      <img class="image" [src]="url" />
+    </ion-item>
+
+    <!-- CAMPO PDF -->
+
+    <ion-item>
+      <ion-label class="normal">Subir RUC </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <label for="pdf-upload">
+            <ion-icon slot="icon-only" name="document-outline"></ion-icon>
+          </label>
+          <input (change)="seleccionarPDf($event)" id="pdf-upload" style="display: none" type="file"
+            accept="application/pdf" />
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item color="danger" *ngIf="errorPDF">
+      <ion-label> Seleccione un archivo del RUC en formato PDF</ion-label>
+    </ion-item>
+
+    <!-- CAMPO BOTONES -->
+
+    <ion-item>
+      <ion-col size="10" offset="1">
+        <ion-button shape="round" type="submit" expand="block" color="success">Guardar Formulario</ion-button>
+        <br />
+        <ion-button shape="round" type="button" expand="block" [routerLink]="['/menu']" color="danger">Regresar
+        </ion-button>
+      </ion-col>
+    </ion-item>
+
+  </form>
+</ion-content>
